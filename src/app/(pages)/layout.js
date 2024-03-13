@@ -13,7 +13,7 @@ const ProtectedLayout = ({ children }) => {
 		const checkAuth = async () => {
 			const isLoggedIn = await authService.isLoggedIn();
 			setAuthStatus(isLoggedIn);
-            // if(isLoggedIn) router.push("/home");
+            if(isLoggedIn) router.push("/home");
 		};
 
 		checkAuth();
