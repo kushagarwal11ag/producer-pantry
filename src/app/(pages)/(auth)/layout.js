@@ -13,7 +13,7 @@ const AuthLayout = ({ children }) => {
 				setAuthStatus(false);
 			});
 		}
-	}, []);
+	});
 
 	return <>{children}</>;
 };

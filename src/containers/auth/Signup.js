@@ -2,11 +2,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 import toast, { Toaster } from "react-hot-toast";
 
 import authService from "@/service/auth";
 import useAuth from "@/context/auth/useAuth";
+
+import loginBanner from "../../../public/loginBanner.png"
 
 const Signup = () => {
 	const router = useRouter();
@@ -67,9 +70,9 @@ const Signup = () => {
 			<Toaster />
 			<section className="min-h-screen flex p-5 gap-10">
 				<section className="w-2/4 md:flex items-center justify-center hidden">
-					<img
-						src="/loginBanner.png"
-						alt="Producer's pantry"
+				<Image
+						src={loginBanner}
+						alt="Producer&apos;s pantry"
 						className="h-full rounded-3xl bg-cover w-full object-cover -scale-x-100"
 					/>
 				</section>

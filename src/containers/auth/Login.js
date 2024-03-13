@@ -2,11 +2,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 import toast, { Toaster } from "react-hot-toast";
 
 import authService from "@/service/auth";
 import useAuth from "@/context/auth/useAuth";
+
+import loginBanner from "../../../public/loginBanner.png"
+import loginHand from "../../../public/loginHand.png"
 
 const Login = () => {
 	const router = useRouter();
@@ -63,8 +67,8 @@ const Login = () => {
 					<div className="max-w-md w-full">
 						<p className="text-center text-4xl mb-16 font-bold flex justify-center items-center gap-2 ">
 							Welcome back
-							<img
-								src="/loginHand.png"
+							<Image
+								src={loginHand}
 								alt=""
 								className=" w-12"
 							/>
@@ -103,7 +107,7 @@ const Login = () => {
 								</button>
 							</form>
 							<p className="text-center text-gray-400 ">
-								Don't have an account?{" "}
+								Don&apos;t have an account?{" "}
 								<Link
 									href="/signup"
 									className="text-black cursor-pointer"
@@ -115,9 +119,9 @@ const Login = () => {
 					</div>
 				</section>
 				<section className="w-2/4 md:flex items-center justify-center hidden">
-					<img
-						src="/loginBanner.png"
-						alt="Producer's pantry"
+					<Image
+						src={loginBanner}
+						alt="Producer&apos;s pantry"
 						className="h-full rounded-3xl bg-cover w-full object-cover"
 					/>
 				</section>
