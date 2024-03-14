@@ -63,7 +63,7 @@ const Login = () => {
 		<>
 			<Toaster />
 			<section className="min-h-screen flex p-5 gap-10">
-				<section className="md:w-2/4 flex justify-center items-center flex-col w-full">
+				<section className="lg:w-2/4 flex justify-center items-center flex-col w-full">
 					<div className="max-w-md w-full">
 						<p className="text-center text-4xl mb-16 font-bold flex justify-center items-center gap-2 ">
 							Welcome back
@@ -118,7 +118,7 @@ const Login = () => {
 						</div>
 					</div>
 				</section>
-				<section className="w-2/4 md:flex items-center justify-center hidden">
+				<section className="w-2/4 lg:flex items-center justify-center hidden">
 					<Image
 						src={loginBanner}
 						alt="Producer&apos;s pantry"
