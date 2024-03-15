@@ -11,6 +11,7 @@ import mission from "../../../public/mission.png";
 
 import Image from "next/image";
 import ServiceCard from "../components/ServiceCard";
+import Footer from "../components/footer/Footer";
 
 const page = () => {
   return (
@@ -177,6 +178,7 @@ const page = () => {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     </>
   );
