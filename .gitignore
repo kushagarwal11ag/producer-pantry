@@ -15,7 +15,6 @@
 
 # production
 /build
-public/p1.jpg
 
 # misc
 .DS_Store
