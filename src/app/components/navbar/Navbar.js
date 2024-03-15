@@ -15,9 +15,9 @@ const Navbar = () => {
           </div>
           <div className="navbar_right">
             <ul className=" gap-8 items-center hidden md:flex">
-              <li>Home</li>
-              <li>Services</li>
-              <li>Contact Us</li>
+              <li><a href="#home">Home</a> </li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#contactUs">Contact Us</a></li>
               <li><Link href="/login">Login</Link></li>
               <Link href="/signup">
               <button className="bg-[#3a8358] px-5 py-2 rounded-lg">

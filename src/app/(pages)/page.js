@@ -21,7 +21,7 @@ const page = () => {
 
         {/* Hero Section  */}
 
-        <div className="hero_section flex flex-col-reverse  md:flex-row gap-5 	  ">
+        <div className="hero_section flex flex-col-reverse  md:flex-row gap-5" id="home">
           <div className="hero_text w-[90%] items-center md:items-start md:w-2/4 flex flex-col gap-4 lg:gap-8 xl:gap-8 justify-end xl:justify-center  pl-[5%]  ">
             <h1 className=" text-4xl lg:text-5xl xl:text-6xl font-bold 	">
               Discover Fresh,
@@ -61,8 +61,8 @@ const page = () => {
 
         {/* Our story section */}
 
-        <div className=" w-[90%] m-auto">
-          <h2 className="mb-4 text-5xl font-bold mt-16">Our story</h2>
+        <div className=" w-[90%] m-auto" >
+          <h2 className="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold mt-16">Our story</h2>
           <p className=" max-w-3xl">
             Welcome to Producer's Pantry, where we're transforming the
             agricultural landscape in Alabama and beyond. At Producer's Pantry,
@@ -72,7 +72,7 @@ const page = () => {
           </p>
 
           <div
-            className="grid grid-cols-3 grid-row-2 gap-5 mt-10"
+            className="grid grid-cols-1  md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 gap-5 mt-10"
             style={{ gridTemplateRows: "200px 200px" }}
           >
             <Image
@@ -118,8 +118,8 @@ const page = () => {
 
         {/* Our offered services */}
 
-        <div className="w-[90%] m-auto">
-          <h2 className="mb-6 text-5xl font-bold mt-16">
+        <div className="w-[90%] m-auto" id="services">
+          <h2 className="mb-6 text-3xl md:text-4xl lg:text-5xl font-bold mt-16">
             Our Offered Services
           </h2>
           <p className=" max-w-3xl">
@@ -127,7 +127,7 @@ const page = () => {
             convenience and quality every step of the way.
           </p>
 
-          <div className="flex gap-5 mt-14">
+          <div className="flex gap-5 mt-14 flex-wrap justify-center">
             <ServiceCard
               icon={mission}
               title="Farm-Fresh Produce"
@@ -153,15 +153,15 @@ const page = () => {
 
         {/* Get in touch section */}
 
-        <div className="w-[90%] mx-auto mt-16">
+        <div className="w-[90%] mx-auto mt-16" id="contactUs">
           <div className="flex ">
-            <div className=" w-2/5 ">
+            <div className=" w-2/5 hidden lg:flex">
               <Image src={hero_i3} className="w-full h-full object-cover rounded-l-3xl"/>
             </div>
-            <div className=" w-3/5  bg-[#f2fff6] px-10 py-14 rounded-r-3xl">
-              <h1 className="text-4xl font-bold mb-8">Get In Touch</h1>
-              <div className="flex gap-10 mb-10">
-                <div className="flex flex-col gap-1 w-full">
+            <div className="w-[100%] lg:w-3/5  bg-[#f2fff6] px-10 py-14 rounded-r-3xl">
+              <h1 className="text-3xl md:text-4xl font-bold mb-8">Get In Touch</h1>
+              <div className="flex-col md:flex md:flex-row  gap-10 mb-10">
+                <div className="flex flex-col gap-1 w-full mb-5 md:mb-0">
                   <label>Name</label>
                   <input type="text" placeholder="Full Name" className="p-4 rounded-2xl border outline-none border-gray-300"/>
                 </div>

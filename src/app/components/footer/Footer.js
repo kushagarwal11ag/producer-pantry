@@ -7,7 +7,7 @@ const Footer = () => {
     <>
       <div className="mt-20">
         <hr className="border-t-2 border-gray-400 my-6" />
-        <div className="py-10 flex  w-[90%] mx-auto gap-[10%]">
+        <div className="py-10 flex-col   md:flex md:flex-row  w-[90%] mx-auto gap-[10%]">
            
           <div className="max-w-sm ">
             <Image src={logoImg} className=" w-14 mb-4"/>
@@ -17,7 +17,7 @@ const Footer = () => {
 
           
           <div>
-            <h5 className="text-xl font-semibold mb-4">Explore</h5>
+            <h5 className="text-xl font-semibold mb-4 mt-4 md:mt-0">Explore</h5>
             <ul className="flex flex-col gap-2">
                 <li>Home</li>
                 <li>Services</li>
@@ -26,7 +26,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-          <h5 className="text-xl font-semibold mb-4">Socials</h5>
+          <h5 className="text-xl font-semibold mb-4 mt-4 md:mt-0">Socials</h5>
             <ul className="flex flex-col gap-2">
                 <li>Facebook</li>
                 <li>Instagram</li>
@@ -35,7 +35,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-          <h5 className="text-xl font-semibold mb-4">Contact</h5>
+          <h5 className="text-xl font-semibold mb-4 mt-4 md:mt-0">Contact</h5>
             <ul className="flex flex-col gap-2">
                 <li>+91 1234567890</li>
                 <li>contact@gmail.com</li>
