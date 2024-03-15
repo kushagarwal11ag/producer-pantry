@@ -8,7 +8,7 @@ import Image from "next/image";
 const page = () => {
   return (
     <>
-      <div className=" relative max-w-[1800px] ">
+      <div className=" relative max-w-[1700px] m-auto">
         <Navbar />
 
         <div className="hero_section flex flex-col-reverse  md:flex-row gap-5 	  ">
