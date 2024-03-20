@@ -7,14 +7,6 @@ import useAuth from "@/context/auth/useAuth";
 const ProtectedLayout = ({ children }) => {
 	const { authStatus, setAuthStatus } = useAuth();
 
-	useEffect(() => {
-		if (authStatus) {
-			authService.logout().then(() => {
-				setAuthStatus(false);
-			});
-		}
-	});
-
 	return <>{children}</>;
 };
 
