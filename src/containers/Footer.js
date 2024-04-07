@@ -5,7 +5,7 @@ import logoImg from "../../public/logo.svg";
 const Footer = () => {
 	return (
 		<>
-			<div className="mt-20">
+			<div className= "container mt-20">
 				<hr className="border-t-2 border-gray-400 my-6" />
 				<div className="py-10 flex-col   md:flex md:flex-row  w-[90%] mx-auto gap-[10%]">
 					<div className="max-w-sm ">
@@ -55,7 +55,7 @@ const Footer = () => {
 						</ul>
 					</div>
 				</div>
-				<hr className="border-t-2 border-gray-400 my-5 w-[90%] mx-auto" />
+				<hr className="border-t-2 border-gray-400 my-5 " />
 
 				<p className="text-center mb-3">
 					Copyright @producers pantry. All Right Reserved
