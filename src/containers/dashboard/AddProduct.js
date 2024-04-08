@@ -25,9 +25,9 @@ const AddProduct = () => {
           <div className="flex flex-col gap-2 w-1/3">
             <lable>Product Brief</lable>
 
-            <textarea
+            <textarea rows={4}
               placeholder="Write your product brief..."
-              className="border border-[#dbdada] outline-none px-2 py-3 rounded-md"
+              className="border border-[#dbdada] outline-none px-2 py-3 rounded-md resize-none "
             />
           </div>
           <div className="flex flex-col gap-2 w-1/3">

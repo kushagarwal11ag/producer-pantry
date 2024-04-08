@@ -17,7 +17,7 @@ import Footer from "@/containers/Footer";
 const WelcomePage = () => {
 	return (
 		<>
-			<div className="  max-w-[1700px] m-auto">
+			<div className="  container">
 				<Navbar />
 
 				{/* Hero Section  */}
