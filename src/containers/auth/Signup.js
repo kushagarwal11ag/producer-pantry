@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 
+import toast, { Toaster } from "react-hot-toast";
+
 import loginBanner from "../../../public/loginBanner.png";
 
 const Signup = () => {
@@ -39,19 +41,22 @@ const Signup = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		let response;
+		const toastId = toast.loading("Authenticating...");
+		if (credentials.password !== credentials.cPassword) {
+			setFormStatus("Passwords must match!");
+			return;
+		}
 		try {
-			if (credentials.password !== credentials.cPassword) {
-				setFormStatus("Passwords must match!");
-				return;
-			}
-			response = await axios.post("/api/users/register", {
+			const response = await axios.post("/api/v1/users/register", {
 				name: credentials.name,
 				email: credentials.email,
 				password: credentials.password,
 				role: credentials.role,
 			});
-			console.log(response);
+
+			toast.success(response?.data?.message, {
+				id: toastId,
+			});
 
 			setCredentials({
 				name: "",
@@ -62,12 +67,18 @@ const Signup = () => {
 			setFormStatus("");
 			router.push("/login");
 		} catch (error) {
-			setFormStatus(response?.data?.message || error.message);
+			const errorMessage =
+				error.response?.data?.message || "Something went wrong";
+			setFormStatus(errorMessage);
+			toast.error("Error", {
+				id: toastId,
+			});
 		}
 	};
 
 	return (
 		<>
+			<Toaster />
 			<section className="w-11/12 max-w-7xl mx-auto flex p-5 gap-10">
 				<section className="w-2/4 md:flex hidden">
 					<Image
