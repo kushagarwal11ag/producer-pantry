@@ -23,7 +23,7 @@ const Navbar = () => {
 
 	const handleLogout = async () => {
 		try {
-			await axios.post("/api/users/logout", {data: " "});
+			await axios.post("/api/users/logout");
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -37,6 +37,8 @@ const Navbar = () => {
 						<Image
 							src={logoImg}
 							alt="logo"
+							width={64}
+							height={64}
 							className="w-10 md:w-16 "
 						/>
 					</Link>
@@ -61,15 +63,20 @@ const Navbar = () => {
 								Signup
 							</Link>
 							<li className="relative">
-								<Image
-									src={profile1}
-									alt="user profile image"
-									className="w-11 h-11 rounded-full"
+								<button
 									onClick={() => setProfileDrop(!profileDrop)}
-								/>
+								>
+									<Image
+										src={profile1}
+										alt="user profile image"
+										className="w-11 h-11 rounded-full"
+										width={44}
+										height={44}
+									/>
+								</button>
 
 								{profileDrop && (
-									<div className="absolute top-16 right-[-120px] bg-white text-black w-64 border border-[#EEEEEE] shadow-lg px-8 py-5">
+									<div className="absolute top-full right-0 bg-white text-black w-64 border border-[#EEEEEE] shadow-lg px-8 py-5 z-50">
 										<h3 className="mb-3">Kushal Agarwal</h3>
 										<hr />
 										<p className="flex gap-3 my-3">
@@ -77,9 +84,12 @@ const Navbar = () => {
 										</p>
 										<hr />
 										<hr />
-										<p className="flex gap-3 my-3">
+										<Link
+											href="/crop/add"
+											className="flex gap-3 my-3"
+										>
 											Add Product
-										</p>
+										</Link>
 										<hr />
 										<Link
 											className="flex gap-3 my-3"
@@ -103,6 +113,8 @@ const Navbar = () => {
 							src={menuImg}
 							alt="mobile navigation"
 							className=" w-7 h-7 flex md:hidden cursor-pointer"
+							width={28}
+							height={28}
 						/>
 					</div>
 				</div>

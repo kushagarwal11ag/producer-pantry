@@ -38,26 +38,26 @@ const Login = () => {
 		event.preventDefault();
 		const toastId = toast.loading("Authenticating...");
 		try {
-			const response = await axios.post("/api/users/login", {
+			const response = await axios.post("/api/v1/users/login", {
 				email: credentials.email,
 				password: credentials.password,
 			});
-			if (response.status === 200) {
-				toast.success("Login success", {
-					id: toastId,
-				});
-			}
+
+			toast.success(response?.data?.message, {
+				id: toastId,
+			});
 
 			setCredentials({
 				email: "",
 				password: "",
 			});
-
 			setFormStatus("");
 			router.push("/home");
 		} catch (error) {
-			setFormStatus(error.message);
-			toast.error("Authentication Error", {
+			const errorMessage =
+				error.response?.data?.message || "Something went wrong";
+			setFormStatus(errorMessage);
+			toast.error("Error", {
 				id: toastId,
 			});
 		}

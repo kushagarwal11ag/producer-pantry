@@ -1,9 +1,9 @@
-import React from "react";
+import Image from "next/image";
 
 const AddProduct = () => {
 	return (
 		<>
-			<div className="">
+			{/* <div className="">
 				<h2 className="text-2xl mb-10 text-center">Add New Product</h2>
 				<div className="flex flex-col gap-3 items-center">
 					<div className="flex flex-col gap-2 w-1/3">
@@ -95,6 +95,151 @@ const AddProduct = () => {
 					<button className="bg-green-500 w-1/3 text-white py-3 rounded-md  ">
 						Add Product
 					</button>
+				</div>
+			</div> */}
+			<div className="flex items-center justify-center">
+				<div className="container max-w-screen-lg mx-auto pb-12 md:pb-0">
+					<div>
+						<form /*onSubmit={handleSubmit}*/>
+							<div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+								<div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+									<div className="text-gray-600">
+										<p className="font-medium text-lg">
+											Create Post
+										</p>
+										<p>Please fill out all the fields.</p>
+										<img
+											// src={imageURL}
+											alt="Post Image"
+											className="w-52 h-52 mt-10 mb-7 object-cover"
+										/>
+										<label>Upload product image</label>
+										<input
+											type="file"
+											name="postImage"
+											accept="image/png, image/jpg, image/jpeg, image/svg"
+											className="mt-3 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+											// onChange={handleFileChange}
+											required
+										/>
+									</div>
+
+									<div className="md:col-span-2">
+										{/* {formStatus && (
+											<p className="text-[#b42318] border-[#b42318]">
+												{formStatus}
+											</p>
+										)} */}
+										<div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+											<div className="md:col-span-5">
+												<label className="text-sm text-gray-600 font-bold">
+													Product Title
+												</label>
+												<input
+													type="text"
+													name="pName"
+													className="w-full mt-2 px-3 py-2 text-black bg-transparent outline-none border-2 border-[darkgrey] focus:border-[#3a8358] shadow-sm rounded-lg"
+													// value={credentials.pName}
+													placeholder="Enter product title"
+													// onChange={onChange}
+													minLength={3}
+													maxLength={20}
+													required
+												/>
+											</div>
+											<div className="md:col-span-5">
+												<label className="text-sm text-gray-600 font-bold">
+													Product Description
+												</label>
+												<textarea
+													rows={2}
+													name="pName"
+													className="w-full mt-2 px-3 py-2 text-black bg-transparent outline-none border-2 border-[darkgrey] focus:border-[#3a8358] shadow-sm rounded-lg"
+													// value={credentials.pName}
+													placeholder="Enter product title"
+													// onChange={onChange}
+													minLength={3}
+													maxLength={150}
+													required
+												/>
+											</div>
+											<div className="md:col-span-2">
+												<label className="text-sm text-gray-600 font-bold">
+													Product Price
+												</label>
+												<input
+													type="text"
+													name="pName"
+													className="w-full mt-2 px-3 py-2 text-black bg-transparent outline-none border-2 border-[darkgrey] focus:border-[#3a8358] shadow-sm rounded-lg"
+													// value={credentials.pName}
+													placeholder="Enter product title"
+													// onChange={onChange}
+													minLength={1}
+													maxLength={3}
+													required
+												/>
+											</div>
+											<div className="md:col-span-1">
+												<label className="text-sm text-gray-600 font-bold">
+													Product Quantity
+												</label>
+												<input
+													type="text"
+													name="pName"
+													className="w-full mt-2 px-3 py-2 text-black bg-transparent outline-none border-2 border-[darkgrey] focus:border-[#3a8358] shadow-sm rounded-lg"
+													// value={credentials.pName}
+													placeholder="Enter product title"
+													// onChange={onChange}
+													maxLength={1}
+													required
+												/>
+											</div>
+											<div className="md:col-span-2">
+												<label className="text-sm text-gray-600 font-bold">
+													Product Available
+												</label>
+												<select
+													className="w-full mt-2 px-3 py-2 text-black bg-transparent outline-none border-2 border-[darkgrey] focus:border-[#3a8358] shadow-sm rounded-lg"
+													name="pCategory"
+													// onChange={onChange}
+													// value={
+													// 	credentials.pCategory
+													// }
+													required
+												>
+													<option value="true">
+														True
+													</option>
+													<option value="false">
+														False
+													</option>
+												</select>
+											</div>
+										</div>
+										<button
+											type="submit"
+											className="mt-2 mr-2 w-fit text-center bg-[#3a8358] hover:bg-[#1f3119] text-white py-2 px-4 inline-flex items-center gap-2 rounded-full"
+										>
+											<Image
+												src="/checked.png"
+												alt="checked icon"
+												width={12}
+												height={12}
+											/>
+											Post
+										</button>
+										<button
+											type="button"
+											// onClick={cancelForm}
+											className="mt-2 w-fit text-center bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-full"
+										>
+											Cancel Changes
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</>
