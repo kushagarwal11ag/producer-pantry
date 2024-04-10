@@ -20,7 +20,7 @@ const Home = ({ all = true }) => {
 				withCredentials: true,
 			});
 			const cropData = res?.data?.data;
-			all ? setCrops(cropData) : setCrops(cropData?.slice(0, 5));
+			all ? setCrops(cropData) : setCrops(cropData?.slice(0, 8));
 		};
 		fetchCrops();
 	}, []);
