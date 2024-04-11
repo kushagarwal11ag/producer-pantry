@@ -47,7 +47,7 @@ const Footer = () => {
 							Contact
 						</h5>
 						<ul className="flex flex-col gap-2">
-							<p>+91 1234567890</p>
+							<p>+1 1234567890</p>
 							<p>contact@gmail.com</p>
 							<p>2972 West Rd, Santa Ana, Illinois 85486</p>
 						</ul>

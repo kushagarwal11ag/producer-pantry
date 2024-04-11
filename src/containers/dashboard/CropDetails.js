@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 
-import crop1 from "../../../public/crop1.png";
 import defaultProfile from "../../../public/defaultProfile.svg";
 
 const ProductDesc = ({ cropId }) => {
@@ -67,11 +66,11 @@ const ProductDesc = ({ cropId }) => {
 									width={48}
 									height={48}
 									alt="User avatar"
-									className="object-cover object-center rounded-full"
+									className="w-12 h-12 rounded-full object-cover object-contain"
 								/>
 								<span>{crop.farmer?.name}</span>
 							</button>
-							<p className="my-7">Created {timeLapsed(crop.createdAt)} day ago</p>
+							<p className="my-7">Created {timeLapsed(crop.createdAt)} days ago</p>
 						</div>
 					</div>
 				</div>

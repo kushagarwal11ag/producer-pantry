@@ -73,22 +73,15 @@ const Navbar = () => {
 
 								{profileDrop && (
 									<div className="absolute top-full right-0 flex flex-col bg-white text-black w-32 border rounded-2xl border-[#EEEEEE] shadow-lg z-50">
-										<Link href="/profile" className="p-2 rounded-t-2xl hover:bg-[#3a8358] hover:text-white">
-											Profile
-										</Link>
-										<hr />
-										<Link
-											className="p-2 hover:bg-[#3a8358] hover:text-white"
-											href="/crop/add"
-										>
+										<Link href="/crop/add" className="p-2 rounded-t-2xl hover:bg-[#3a8358] hover:text-white">
 											Add Product
 										</Link>
 										<hr />
 										<Link
 											className="p-2 hover:bg-[#3a8358] hover:text-white"
-											href="/contact"
+											href="/profile"
 										>
-											Contact Us
+											Profile
 										</Link>
 										<hr />
 										<Link

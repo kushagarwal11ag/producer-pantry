@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
-
 import toast, { Toaster } from "react-hot-toast";
 
 const AddProduct = () => {
@@ -66,7 +65,7 @@ const AddProduct = () => {
 				available: true,
 			});
 			setFormStatus("");
-			// router.push("/home");
+			router.push("/home");
 		} catch (error) {
 			const errorMessage =
 				error.response?.data?.message || "Something went wrong. Try again";

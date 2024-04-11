@@ -17,7 +17,10 @@ export default function RootLayout({ children }) {
 					href="/logo.svg"
 				/>
 			</head>
-			<body><Navbar />{children}</body>
+			<body>
+				<Navbar />
+				{children}
+			</body>
 		</html>
 	);
 }
