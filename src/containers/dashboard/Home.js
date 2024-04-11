@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
+import Link from "next/link";
 
 const Home = ({ all = true }) => {
 	const compareDate = (createdAt) => {
@@ -37,9 +38,10 @@ const Home = ({ all = true }) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
 					{crops.length > 0 &&
 						crops.map((crop) => (
-							<div
+							<Link
 								className="border-2 border-[#f6f6f6] product_card transition-all cursor-pointer"
 								key={crop._id}
+								href={`crop/${crop._id}`}
 							>
 								<div className="relative">
 									<Image
@@ -65,7 +67,7 @@ const Home = ({ all = true }) => {
 										</span>
 									</div>
 								</div>
-							</div>
+							</Link>
 						))}
 				</div>
 			</section>

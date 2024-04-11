@@ -6,10 +6,6 @@ import axios from "axios";
 
 import logoImg from "../../public/logo.svg";
 import menuImg from "../../public/mobileMenu.svg";
-import userCircle from "../../public/userCircle.svg";
-import editProfile from "../../public/editProfile.svg";
-import help from "../../public/help.svg";
-import logout from "../../public/logout.svg";
 
 import profile1 from "../../public/profile2.jpg";
 import { useState } from "react";
@@ -23,7 +19,7 @@ const Navbar = () => {
 
 	const handleLogout = async () => {
 		try {
-			await axios.post("/api/users/logout");
+			await axios.post("/api/v1/users/logout");
 		} catch (error) {
 			console.error(error.message);
 		}
@@ -76,30 +72,27 @@ const Navbar = () => {
 								</button>
 
 								{profileDrop && (
-									<div className="absolute top-full right-0 bg-white text-black w-64 border border-[#EEEEEE] shadow-lg px-8 py-5 z-50">
-										<h3 className="mb-3">Kushal Agarwal</h3>
-										<hr />
-										<p className="flex gap-3 my-3">
+									<div className="absolute top-full right-0 flex flex-col bg-white text-black w-32 border rounded-2xl border-[#EEEEEE] shadow-lg z-50">
+										<Link href="/profile" className="p-2 rounded-t-2xl hover:bg-[#3a8358] hover:text-white">
 											Profile
-										</p>
-										<hr />
+										</Link>
 										<hr />
 										<Link
+											className="p-2 hover:bg-[#3a8358] hover:text-white"
 											href="/crop/add"
-											className="flex gap-3 my-3"
 										>
 											Add Product
 										</Link>
 										<hr />
 										<Link
-											className="flex gap-3 my-3"
+											className="p-2 hover:bg-[#3a8358] hover:text-white"
 											href="/contact"
 										>
 											Contact Us
 										</Link>
 										<hr />
 										<Link
-											className="flex gap-3 my-3"
+											className="p-2 rounded-b-2xl hover:bg-[#3a8358] hover:text-white"
 											href="/login"
 											onClick={handleLogout}
 										>

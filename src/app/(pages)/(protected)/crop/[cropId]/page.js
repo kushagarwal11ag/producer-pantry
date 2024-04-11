@@ -1,9 +1,12 @@
-import CropDetails from "@/containers/dashboard/CropDetails"
+import CropDetails from "@/containers/dashboard/CropDetails";
 
-const page = () => {
-  return (
-    <><CropDetails /></>
-  )
-}
+const page = ({ params }) => {
+	const { cropId } = params;
+	return (
+		<>
+			<CropDetails cropId={cropId} />
+		</>
+	);
+};
 
-export default page
+export default page;

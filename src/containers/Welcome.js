@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import hero_i1 from "../../public/hero_i1.jpg";
 import hero_i2 from "../../public/hero_i2.jpg";
@@ -37,9 +38,9 @@ const WelcomePage = () => {
 							Source for Sustainable Harvests. Join us in
 							Cultivating Change, One Direct Connection at a Time.
 						</p>
-						<button className="bg-[#3a8358] max-w-fit text-white rounded-lg py-3 px-5  cursor-pointer">
+						<Link href="/home" className="bg-[#3a8358] max-w-fit text-white rounded-lg py-3 px-5 cursor-pointer">
 							Explore Products
-						</button>
+						</Link>
 					</div>
 					<div className="hero_img  m-auto md:w-2/4 grid grid-rows-2 grid-cols-3 gap-5">
 						<Image
