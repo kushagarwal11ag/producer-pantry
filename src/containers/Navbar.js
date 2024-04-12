@@ -1,21 +1,35 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
 import logoImg from "../../public/logo.svg";
 import menuImg from "../../public/mobileMenu.svg";
-
-import profile1 from "../../public/profile2.jpg";
-import { useState } from "react";
-
-// const instance = axios.create({
-// 	withCredentials: true,
-// });
+import defaultProfile from "../../public/defaultProfile.svg";
 
 const Navbar = () => {
 	const [profileDrop, setProfileDrop] = useState(false);
+	const [userAvatar, setUserAvatar] = useState(defaultProfile);
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const fetchUserAvatar = async () => {
+				try {
+					const user = await axios.get("/api/v1/users/current-user", {
+						withCredentials: true,
+					});
+					const userDetails = user?.data?.data;
+					setUserAvatar(userDetails?.avatar?.url || defaultProfile);
+				} catch (error) {
+					console.log(error);
+				}
+			};
+
+			fetchUserAvatar();
+		}
+	}, [typeof window !== "undefined" ? window.location.href : ""]);
 
 	const handleLogout = async () => {
 		try {
@@ -63,9 +77,9 @@ const Navbar = () => {
 									onClick={() => setProfileDrop(!profileDrop)}
 								>
 									<Image
-										src={profile1}
+										src={userAvatar}
 										alt="user profile image"
-										className="w-11 h-11 rounded-full"
+										className="w-11 h-11 object-contain object-cover rounded-full"
 										width={44}
 										height={44}
 									/>
@@ -73,7 +87,10 @@ const Navbar = () => {
 
 								{profileDrop && (
 									<div className="absolute top-full right-0 flex flex-col bg-white text-black w-32 border rounded-2xl border-[#EEEEEE] shadow-lg z-50">
-										<Link href="/crop/add" className="p-2 rounded-t-2xl hover:bg-[#3a8358] hover:text-white">
+										<Link
+											href="/crop/add"
+											className="p-2 rounded-t-2xl hover:bg-[#3a8358] hover:text-white"
+										>
 											Add Product
 										</Link>
 										<hr />

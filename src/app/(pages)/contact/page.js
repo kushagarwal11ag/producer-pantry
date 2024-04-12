@@ -1,4 +1,4 @@
-import Contact from "@/containers/dashboard/Contact";
+import Contact from "@/containers/Contact";
 
 const ContactPage = () => {
 	return (

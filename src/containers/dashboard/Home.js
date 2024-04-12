@@ -17,11 +17,15 @@ const Home = ({ all = true }) => {
 
 	useEffect(() => {
 		const fetchCrops = async () => {
-			const res = await axios.get("/api/v1/crops/all-crops", {
-				withCredentials: true,
-			});
-			const cropData = res?.data?.data;
-			all ? setCrops(cropData) : setCrops(cropData?.slice(0, 8));
+			try {
+				const res = await axios.get("/api/v1/crops/all-crops", {
+					withCredentials: true,
+				});
+				const cropData = res?.data?.data;
+				all ? setCrops(cropData) : setCrops(cropData?.slice(0, 8));
+			} catch (error) {
+				console.log(error);
+			}
 		};
 		fetchCrops();
 	}, []);
