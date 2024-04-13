@@ -220,7 +220,7 @@ const ProfilePage = () => {
 											alt="User Profile Image"
 											width={200}
 											height={200}
-											className="w-52 h-52 m-7 rounded-full object-cover object-contain"
+											className="w-52 h-52 m-7 rounded-full object-cover "
 										/>
 										<label className="flex gap-2 items-center justify-start">
 											<p>Upload Avatar</p>

@@ -26,9 +26,9 @@ const Footer = () => {
 							Explore
 						</h5>
 						<ul className="flex flex-col gap-2">
-							<Link href="/home">Home</Link>
-							<Link href="/explore">Explore</Link>
-							<Link href="/contact">Contact</Link>
+							<Link href="/home" className="hover:text-[#3a8358]">Home</Link>
+							<Link href="/explore"  className="hover:text-[#3a8358]">Explore</Link>
+							<Link href="/contact"  className="hover:text-[#3a8358]">Contact</Link>
 						</ul>
 					</div>
 					<div>
@@ -36,10 +36,10 @@ const Footer = () => {
 							Socials
 						</h5>
 						<ul className="flex flex-col gap-2">
-							<Link href="#">Facebook</Link>
-							<Link href="#">Instagram</Link>
-							<Link href="#">Twitter</Link>
-							<Link href="#">YouTube</Link>
+							<Link href="#"  className="hover:text-[#3a8358]">Facebook</Link>
+							<Link href="#"  className="hover:text-[#3a8358]">Instagram</Link>
+							<Link href="#" className="hover:text-[#3a8358]">Twitter</Link>
+							<Link href="#" className="hover:text-[#3a8358]">YouTube</Link>
 						</ul>
 					</div>
 					<div>
