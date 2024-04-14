@@ -6,12 +6,12 @@ li,
 button {
 	cursor: pointer;
 }
-/* .container {
+.container {
 	width: 83%;
 	max-width: 80rem;
 	margin-left: auto;
 	margin-right: auto;
-} */
+}
 .product_card:hover {
 	box-shadow: 0 16px 32px 0 rgba(7, 28, 31, 0.1);
 }
@@ -56,4 +56,39 @@ button {
 
 .custum-file-upload input {
 	display: none;
+}
+
+.radio-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.radio-list li {
+	width: 50%; /* Each radio button takes up half of the width */
+	box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.radio-list input[type="radio"] {
+	display: none; /* Hide the default radio button */
+}
+
+.radio-list label {
+	cursor: pointer;
+	display: block;
+	padding: 10px 15px;
+	border: 1px solid #ccc;
+
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.radio-list label:hover {
+	background-color: #f0f0f0;
+}
+
+/* Style for checked radio button */
+.radio-list input[type="radio"]:checked + label {
+	background-color: #3a8358;
+	color: #fff;
+	border-color: #3a8358;
 }

@@ -92,9 +92,6 @@ const Signup = () => {
 						<p className="text-center text-4xl m-2 font-bold">
 							Create an account
 						</p>
-						<p className="font-semibold text-center">
-							Please enter your details
-						</p>
 
 						<div className="mt-5">
 							<form
@@ -104,6 +101,51 @@ const Signup = () => {
 								{formStatus && (
 									<p className="text-red-500">{formStatus}</p>
 								)}
+								<h3 className="text-center font-semibold ">
+									Please select your role
+								</h3>
+								<div className="radio-list w-full">
+									<ul className="w-full flex ">
+										<li className="flex-1">
+											<input
+												id="horizontal-list-radio-license"
+												name="role"
+												type="radio"
+												value="farmer"
+												checked={
+													credentials.role ===
+													"farmer"
+												}
+												onChange={onChange}
+											/>
+											<label
+												htmlFor="horizontal-list-radio-license"
+												className="text-center rounded-l-full"
+											>
+												Farmer
+											</label>
+										</li>
+										<li className="flex-1">
+											<input
+												id="horizontal-list-radio-id"
+												name="role"
+												type="radio"
+												value="retailer"
+												checked={
+													credentials.role ===
+													"retailer"
+												}
+												onChange={onChange}
+											/>
+											<label
+												htmlFor="horizontal-list-radio-id"
+												className="text-center rounded-r-full"
+											>
+												Retailer
+											</label>
+										</li>
+									</ul>
+								</div>
 								<input
 									className="border-2 w-full rounded-full py-3 px-3 outline-none"
 									type="text"
@@ -143,56 +185,6 @@ const Signup = () => {
 									required
 									placeholder="Confirm your password"
 								/>
-
-								<h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
-									Enter your Profession
-								</h3>
-								<ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-full sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-									<li className="w-full border-gray-200 dark:border-gray-600">
-										<div className="flex items-center ps-3">
-											<input
-												id="horizontal-list-radio-license"
-												name="role"
-												type="radio"
-												value="farmer"
-												checked={
-													credentials.role ===
-													"farmer"
-												}
-												onChange={onChange}
-												className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-											/>
-											<label
-												htmlFor="horizontal-list-radio-license"
-												className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-											>
-												Farmer
-											</label>
-										</div>
-									</li>
-									<li className="w-full border-gray-200 dark:border-gray-600">
-										<div className="flex items-center ps-3">
-											<input
-												id="horizontal-list-radio-id"
-												name="role"
-												type="radio"
-												value="retailer"
-												checked={
-													credentials.role ===
-													"retailer"
-												}
-												onChange={onChange}
-												className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-											/>
-											<label
-												htmlFor="horizontal-list-radio-id"
-												className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-											>
-												Retailer
-											</label>
-										</div>
-									</li>
-								</ul>
 
 								<button className="bg-orange-600 text-white px-4 py-3 w-full rounded-full cursor-pointer my-6">
 									Join Now

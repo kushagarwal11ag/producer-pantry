@@ -4,14 +4,20 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import { Dropdown } from "antd";
 
 import logoImg from "../../public/logo.svg";
 import menuImg from "../../public/mobileMenu.svg";
+import closeIcon from "../../public/closeIcon.svg";
 import defaultProfile from "../../public/defaultProfile.svg";
 
-const Navbar = () => {
-	const [profileDrop, setProfileDrop] = useState(false);
+const Navbar = ({ isProtected = false }) => {
 	const [userAvatar, setUserAvatar] = useState(defaultProfile);
+	const [showMobileNav, setShowMobileNav] = useState(false);
+
+	const toggleMobileNav = () => {
+		setShowMobileNav(!showMobileNav);
+	};
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -27,7 +33,7 @@ const Navbar = () => {
 				}
 			};
 
-			fetchUserAvatar();
+			if (isProtected) fetchUserAvatar();
 		}
 	}, [typeof window !== "undefined" ? window.location.href : ""]);
 
@@ -38,6 +44,41 @@ const Navbar = () => {
 			console.error(error.message);
 		}
 	};
+
+	const items = [
+		{
+			key: "1",
+			label: (
+				<Link href="/crop/add" className="p-2">
+					Add Product
+				</Link>
+			),
+		},
+		{
+			key: "2",
+			label: (
+				<Link className="p-2" href="/profile">
+					Profile
+				</Link>
+			),
+		},
+		{
+			key: "3",
+			label: (
+				<Link className="p-2" href="/crop/my">
+					My crops
+				</Link>
+			),
+		},
+		{
+			key: "4",
+			label: (
+				<Link className="p-2" href="/login" onClick={handleLogout}>
+					Logout
+				</Link>
+			),
+		},
+	];
 
 	return (
 		<>
@@ -54,73 +95,132 @@ const Navbar = () => {
 					</Link>
 					<div className="navbar_right">
 						<ul className=" gap-8 items-center hidden md:flex">
-							<li>
-								<Link href="/home">Home</Link>
-							</li>
-							<li>
-								<Link href="/explore">Explore</Link>
-							</li>
-							<li>
-								<Link href="/contact">Contact Us</Link>
-							</li>
-							<li>
-								<Link href="/login">Login</Link>
-							</li>
-							<Link
-								className="bg-[#3a8358] px-5 py-2 rounded-lg"
-								href="/signup"
-							>
-								Signup
-							</Link>
-							<li className="relative">
-								<button
-									onClick={() => setProfileDrop(!profileDrop)}
-								>
-									<Image
-										src={userAvatar}
-										alt="user profile image"
-										className="w-11 h-11 object-contain object-cover rounded-full"
-										width={44}
-										height={44}
-									/>
-								</button>
-
-								{profileDrop && (
-									<div className="absolute top-full right-0 flex flex-col bg-white text-black w-32 border rounded-2xl border-[#EEEEEE] shadow-lg z-50">
-										<Link
-											href="/crop/add"
-											className="p-2 rounded-t-2xl hover:bg-[#3a8358] hover:text-white"
-										>
-											Add Product
-										</Link>
-										<hr />
-										<Link
-											className="p-2 hover:bg-[#3a8358] hover:text-white"
-											href="/profile"
-										>
-											Profile
-										</Link>
-										<hr />
-										<Link
-											className="p-2 rounded-b-2xl hover:bg-[#3a8358] hover:text-white"
-											href="/login"
-											onClick={handleLogout}
-										>
-											Logout
-										</Link>
-									</div>
-								)}
-							</li>
+							{isProtected ? (
+								<>
+									<li className="hover:text-orange-600">
+										<Link href="/home">Home</Link>
+									</li>
+									<li className="hover:text-orange-600">
+										<Link href="/explore">Explore</Link>
+									</li>
+									<li className="hover:text-orange-600">
+										<Link href="/contact">Contact Us</Link>
+									</li>
+								</>
+							) : (
+								<>
+									<li className="hover:text-orange-600">
+										<Link href="/login">Login</Link>
+									</li>
+									<Link
+										className="px-5 py-2 rounded-lg hover:bg-orange-600 bg-[#3a8358]"
+										href="/signup"
+									>
+										Signup
+									</Link>
+								</>
+							)}
+							{isProtected && (
+								<li className="relative">
+									<Dropdown
+										placement="bottom"
+										menu={{
+											items,
+										}}
+									>
+										<Image
+											src={userAvatar}
+											alt="user profile image"
+											className="w-10 h-10 rounded-full object-cover"
+											width={44}
+											height={44}
+										/>
+									</Dropdown>
+								</li>
+							)}
 						</ul>
 						<Image
 							src={menuImg}
 							alt="mobile navigation"
-							className=" w-7 h-7 flex md:hidden cursor-pointer"
+							className="w-7 h-7 flex md:hidden cursor-pointer"
 							width={28}
 							height={28}
+							onClick={toggleMobileNav}
 						/>
 					</div>
 				</div>
+				{showMobileNav && (
+					<div className="mobile_nav bg-white text-black fixed top-0 bottom-0 left-0 z-[101] w-full md:w-72 transition-transform duration-300 ease-in-out transform translate-x-0">
+						<div className="mobile_nav_header flex justify-between items-center px-5 py-3 border-b border-gray-200">
+							<h3 className="text-lg font-semibold">Menu</h3>
+							<Image
+								src={closeIcon}
+								alt="close icon"
+								className="w-6 h-6 cursor-pointer"
+								onClick={toggleMobileNav}
+							/>
+						</div>
+						<div className="mobile_nav_links px-5 py-3 ">
+							<ul className="flex flex-col gap-8 items-center ">
+								{isProtected ? (
+									<>
+										<li>
+											<Link
+												href="/home"
+												onClick={toggleMobileNav}
+											>
+												Home
+											</Link>
+										</li>
+										<li>
+											<Link
+												href="/explore"
+												onClick={toggleMobileNav}
+											>
+												Explore
+											</Link>
+										</li>
+										<li>
+											<Link
+												href="/contact"
+												onClick={toggleMobileNav}
+											>
+												Contact Us
+											</Link>
+										</li>
+										<li>
+											<Link
+												href="/login"
+												onClick={handleLogout}
+											>
+												Logout
+											</Link>
+										</li>
+									</>
+								) : (
+									<>
+										<li>
+											<Link
+												href="/login"
+												onClick={toggleMobileNav}
+											>
+												Login
+											</Link>
+										</li>
+										<Link
+											href="/signup"
+											onClick={toggleMobileNav}
+										>
+											<button className="bg-[#3a8358] text-white px-5 py-2 rounded-lg">
+												Signup
+											</button>
+										</Link>
+									</>
+								)}
+							</ul>
+						</div>
+					</div>
+				)}
 			</div>
 		</>
 	);
