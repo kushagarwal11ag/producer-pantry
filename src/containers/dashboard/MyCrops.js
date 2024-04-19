@@ -1,50 +1,66 @@
-import Link from 'next/link'
-import React from 'react'
-import crop_img from "../../../public/hero_i3.jpg"
-import Image from 'next/image'
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import axios from "axios";
+import Link from "next/link";
+
 const MyCrops = () => {
-  return (
-   <>
-   <section className="w-11/12 max-w-7xl mx-auto">
-        <h1 className="text-center text-4xl font-bold mb-2">My Crops</h1>
+	const [crops, setCrops] = useState([]);
 
-        {/* Product grid */}
+	useEffect(() => {
+		const fetchMyCrops = async () => {
+			try {
+				const res = await axios.get("/api/v1/crops/my-crops", {
+					withCredentials: true,
+				});
+				const cropData = res?.data?.data;
+				setCrops(cropData);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		fetchMyCrops();
+	}, []);
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
-        
-              <Link 
-                className="border-2 border-[#f6f6f6] product_card transition-all cursor-pointer "
-                href={`#`}
-              >
-                <div
-                  className="relative w-full h-96 ">
-                  <div>
-                    <Image
-                      src={crop_img}
-                      alt="crops"
-                      fill
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
+	return (
+		<>
+			<section className="w-11/12 max-w-7xl mx-auto">
+				<h1 className="text-center text-4xl font-bold mb-2">
+					My Crops
+				</h1>
 
-                
-                    <div className="badge absolute top-4 right-4 text-xs bg-[#80B500]  px-3 py-1 rounded-tl-xl rounded-br-xl text-white">
-                      NEW
-                    </div>
-                
-                </div>
-                <div className="mt-4 text-center mb-4">
-                  <span className="font-bold">Crop name</span>
-                  <div className="text-[#80B500] font-bold">
-                    <span className="mr-3 font-semibold">$999</span>
-                  </div>
-                </div>
-              </Link>
-         
-        </div>
-      </section>
-   </>
-  )
-}
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
+					{crops.length > 0 &&
+						crops.map((crop) => (
+							<Link
+								className="border-2 border-[#f6f6f6] product_card transition-all cursor-pointer"
+								key={crop._id}
+								href={`/crop/${crop._id}`}
+							>
+								<div className="relative w-full h-96 ">
+									<div>
+										<Image
+											src={crop.image}
+											alt="crops"
+											fill
+											style={{ objectFit: "cover" }}
+										/>
+									</div>
+								</div>
+								<div className="py-2 text-center mb-4">
+									<span className="font-bold">
+										{crop.name}
+									</span>
+									<div className="text-green-800 font-semibold">
+										${crop.price}
+									</div>
+								</div>
+							</Link>
+						))}
+				</div>
+			</section>
+		</>
+	);
+};
 
-export default MyCrops
+export default MyCrops;

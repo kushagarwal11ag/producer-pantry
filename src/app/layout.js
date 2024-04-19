@@ -1,5 +1,4 @@
 import "./globals.css";
-import Navbar from "@/containers/Navbar";
 
 export const metadata = {
 	title: "Producer's pantry",
@@ -18,7 +17,6 @@ export default function RootLayout({ children }) {
 				/>
 			</head>
 			<body>
-				<Navbar />
 				{children}
 			</body>
 		</html>

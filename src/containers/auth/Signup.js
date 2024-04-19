@@ -76,101 +76,115 @@ const Signup = () => {
     }
   };
 
-  return (
-    <>
-      <Toaster />
-      <section className="w-11/12 max-w-7xl mx-auto flex p-5 gap-10">
-        <section className="w-2/4 md:flex hidden">
-          <Image
-            src={loginBanner}
-            alt="Producer's pantry"
-            className="rounded-3xl bg-cover object-cover -scale-x-100"
-          />
-        </section>
-        <section className="md:w-2/4 flex justify-center items-center flex-col w-full">
-          <div className="max-w-md w-full">
-            <p className="text-center text-4xl m-2 font-bold">
-              Create an account
-            </p>
-            <p className="font-semibold text-center">
-              Please enter your details
-            </p>
+	return (
+		<>
+			<Toaster />
+			<section className="w-11/12 max-w-7xl mx-auto flex p-5 gap-10">
+				<section className="w-2/4 md:flex hidden">
+					<Image
+						src={loginBanner}
+						alt="Producer's pantry"
+						className="rounded-3xl bg-cover object-cover -scale-x-100"
+					/>
+				</section>
+				<section className="md:w-2/4 flex justify-center items-center flex-col w-full">
+					<div className="max-w-md w-full">
+						<p className="text-center text-4xl m-2 font-bold">
+							Create an account
+						</p>
 
-            <div className="mt-5">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                {formStatus && <p className="text-red-500">{formStatus}</p>}
-				<h3 className="font-semibold ">Please select your role</h3>
-                <div class="radio-list w-full">
-                  <ul className="w-full flex ">
-                    <li className="flex-1">
-                      <input
-                        id="horizontal-list-radio-license"
-                        name="role"
-                        type="radio"
-                        value="farmer"
-						
-                        checked={credentials.role === "farmer"}
-                        onChange={onChange}
-                      />
-                      <label htmlFor="horizontal-list-radio-license" className=" rounded-l-full">
-                        Farmer
-                      </label>
-                    </li>
-                    <li className=" flex-1">
-                      <input
-                        id="horizontal-list-radio-id"
-                        name="role"
-                        type="radio"
-                        value="retailer"
-						c
-                        checked={credentials.role === "retailer"}
-                        onChange={onChange}
-                      />
-                      <label htmlFor="horizontal-list-radio-id" className="rounded-r-full">Retailer</label>
-                    </li>
-                  </ul>
-                </div>
-                <input
-                  className="border-2 w-full rounded-full py-3 px-3 outline-none"
-                  type="text"
-                  name="name"
-                  value={credentials.name}
-                  onChange={onChange}
-                  required
-                  aria-describedby="name"
-                  placeholder="Enter your name"
-                  maxLength={20}
-                />
-                <input
-                  className="border-2 w-full rounded-full py-3 px-3 outline-none"
-                  type="email"
-                  name="email"
-                  value={credentials.email}
-                  onChange={onChange}
-                  required
-                  aria-describedby="email"
-                  placeholder="Enter email"
-                />
-                <input
-                  className="border-2 w-full rounded-full py-3 px-3 outline-none"
-                  type="password"
-                  name="password"
-                  value={credentials.password}
-                  onChange={onChange}
-                  required
-                  placeholder="Enter your password"
-                />
-                <input
-                  className="border-2 w-full rounded-full py-3 px-3 outline-none"
-                  type="password"
-                  name="cPassword"
-                  value={credentials.cPassword}
-                  onChange={onChange}
-                  required
-                  placeholder="Confirm your password"
-                />
-
-              
+						<div className="mt-5">
+							<form
+								onSubmit={handleSubmit}
+								className="flex flex-col gap-3"
+							>
+								{formStatus && (
+									<p className="text-red-500">{formStatus}</p>
+								)}
+								<h3 className="text-center font-semibold ">
+									Please select your role
+								</h3>
+								<div className="radio-list w-full">
+									<ul className="w-full flex ">
+										<li className="flex-1">
+											<input
+												id="horizontal-list-radio-license"
+												name="role"
+												type="radio"
+												value="farmer"
+												checked={
+													credentials.role ===
+													"farmer"
+												}
+												onChange={onChange}
+											/>
+											<label
+												htmlFor="horizontal-list-radio-license"
+												className="text-center rounded-l-full"
+											>
+												Farmer
+											</label>
+										</li>
+										<li className="flex-1">
+											<input
+												id="horizontal-list-radio-id"
+												name="role"
+												type="radio"
+												value="retailer"
+												checked={
+													credentials.role ===
+													"retailer"
+												}
+												onChange={onChange}
+											/>
+											<label
+												htmlFor="horizontal-list-radio-id"
+												className="text-center rounded-r-full"
+											>
+												Retailer
+											</label>
+										</li>
+									</ul>
+								</div>
+								<input
+									className="border-2 w-full rounded-full py-3 px-3 outline-none"
+									type="text"
+									name="name"
+									value={credentials.name}
+									onChange={onChange}
+									required
+									aria-describedby="name"
+									placeholder="Enter your name"
+									maxLength={20}
+								/>
+								<input
+									className="border-2 w-full rounded-full py-3 px-3 outline-none"
+									type="email"
+									name="email"
+									value={credentials.email}
+									onChange={onChange}
+									required
+									aria-describedby="email"
+									placeholder="Enter email"
+								/>
+								<input
+									className="border-2 w-full rounded-full py-3 px-3 outline-none"
+									type="password"
+									name="password"
+									value={credentials.password}
+									onChange={onChange}
+									required
+									placeholder="Enter your password"
+								/>
+								<input
+									className="border-2 w-full rounded-full py-3 px-3 outline-none"
+									type="password"
+									name="cPassword"
+									value={credentials.cPassword}
+									onChange={onChange}
+									required
+									placeholder="Confirm your password"
+								/>
 
                 <button className="bg-orange-600 text-white px-4 py-3 w-full rounded-full cursor-pointer my-6">
                   Join Now

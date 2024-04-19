@@ -83,28 +83,18 @@ const ProfilePage = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		if (
-			imageUrl.govId === uploadFile &&
-			imageUrl.certification === uploadFile
-		) {
+		if (!imageUrl.govId || !imageUrl.certification) {
 			setFormStatus("Add the required documentation");
 			return;
 		}
 		toastId = toast.loading("Updating");
 		try {
-			await axios.patch(
-				"/api/v1/users/update",
-				{
-					name: user.name,
-					address: user.address,
-					phone: user.phone,
-				},
-				{ withCredentials: true }
-			);
-
-			await changePassword();
-
-			await updateFiles();
+			const info = await updatePersonalInfo();
+            if(!info) return;
+			const pwd = await changePassword();
+            if(!pwd) return;
+			const updateFile = await updateFiles();
+            if(!updateFile) return;
 
 			toast.success("Profile updated successfully", {
 				id: toastId,
@@ -128,13 +118,22 @@ const ProfilePage = () => {
 			setFormStatus("");
 			router.push("/home");
 		} catch (error) {
-			const errorMessage =
-				error.response?.data?.message ||
-				"Something went wrong. Try again";
-			setFormStatus(errorMessage);
-			toast.error("Error", {
-				id: toastId,
-			});
+			handleAxiosError(error);
+		}
+	};
+
+	const updatePersonalInfo = async () => {
+		const { name, address, phone } = user;
+		try {
+			await axios.patch(
+				"/api/v1/users/update",
+				{ name, address, phone },
+				{ withCredentials: true }
+			);
+            return true;
+		} catch (error) {
+			handleAxiosError(error);
+            return false;
 		}
 	};
 
@@ -158,46 +157,45 @@ const ProfilePage = () => {
 					},
 				});
 			}
+            return true;
 		} catch (error) {
-			const errorMessage =
-				error.response?.data?.message ||
-				"Something went wrong. Try again";
-			setFormStatus(errorMessage);
-			toast.error("Error", {
-				id: toastId,
-			});
+			handleAxiosError(error);
+            return false;
 		}
 	};
 
 	const changePassword = async () => {
-		if (user.oldPassword && user.newPassword) {
-			if (!user.confirmNewPassword) {
-				setFormStatus("Please confirm the new password");
-				return;
-			}
-			if (user.newPassword !== user.confirmNewPassword) {
-				setFormStatus("New password mismatch");
-				return;
-			}
-			try {
-				userPassword = await axios.post(
-					"/api/v1/users/change-password",
-					{
-						oldPassword: user.oldPassword,
-						newPassword: user.newPassword,
-					},
-					{ withCredentials: true }
-				);
-			} catch (error) {
-				const errorMessage =
-					error.response?.data?.message ||
-					"Something went wrong. Try again";
-				setFormStatus(errorMessage);
+		const { oldPassword, newPassword, confirmNewPassword } = user;
+		if (oldPassword && newPassword) {
+			if (!confirmNewPassword || newPassword !== confirmNewPassword) {
+				setFormStatus("New password mismatch or not confirmed");
 				toast.error("Error", {
 					id: toastId,
 				});
+                return false;
+			}
+			try {
+				await axios.post(
+					"/api/v1/users/change-password",
+					{ oldPassword, newPassword },
+					{ withCredentials: true }
+				);
+                return true;
+			} catch (error) {
+				handleAxiosError(error);
+                return false;
 			}
 		}
+        return true;
+	};
+
+	const handleAxiosError = (error) => {
+		const errorMessage =
+			error.response?.data?.message || "Something went wrong. Try again";
+		setFormStatus(errorMessage);
+		toast.error("Error", {
+			id: toastId,
+		});
 	};
 
 	return (
