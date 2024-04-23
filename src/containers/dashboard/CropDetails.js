@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Popover } from "antd";
@@ -9,7 +10,11 @@ import axios from "axios";
 import defaultProfile from "../../../public/defaultProfile.svg";
 
 const ProductDesc = ({ cropId }) => {
+	const router = useRouter();
+
 	const [crop, setCrop] = useState(null);
+	const [userRole, setUserRole] = useState(null);
+	const [credentials, setCredentials] = useState({ quantity: 1 });
 
 	useEffect(() => {
 		const fetchCrop = async () => {
@@ -20,8 +25,9 @@ const ProductDesc = ({ cropId }) => {
 						withCredentials: true,
 					}
 				);
-				const cropDetails = fetchedCrop?.data?.data?.[0];
-				setCrop(cropDetails);
+				const cropDetails = fetchedCrop?.data?.data;
+				setUserRole(cropDetails?.userRole);
+				setCrop(cropDetails?.cropDetails);
 			} catch (error) {
 				console.log(error);
 			}
@@ -29,9 +35,31 @@ const ProductDesc = ({ cropId }) => {
 		fetchCrop();
 	}, [cropId]);
 
+	const onChange = (event) => {
+		setCredentials({
+			...credentials,
+			[event.target.name]: event.target.value,
+		});
+	};
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		try {
+			await axios.patch(
+				`/api/v1/crops/cart/${crop?._id}`,
+				{ quantity: credentials.quantity },
+				{ withCredentials: true }
+			);
+			router.push("/home");
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const handleDelete = async () => {
 		try {
 			await axios.delete(`/api/v1/crops/crop/${crop?._id}`);
+			router.push("/home");
 		} catch (error) {
 			console.log(error);
 		}
@@ -123,36 +151,45 @@ const ProductDesc = ({ cropId }) => {
 									: "Out of stock"}
 							</div>
 
-							<div className="mt-4">
-								<label>Quantity</label>
-								<div className="mt-2">
-									<input
-										type="number"
-										defaultValue={1}
-										min={1}
-										max={10}
-										className="border border-[#c9c9c9] pl-4 py-2"
-									/>
-								</div>
-							</div>
-							<div className="mt-7">
-								<button className="bg-[#363636] text-white py-3 w-full flex items-center gap-3 justify-center">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										height="30"
-										viewBox="0 0 16 16"
-										width="30"
-									>
-										<g fill="currentColor">
-											<path d="m2.5 2c-.27614 0-.5.22386-.5.5s.22386.5.5.5h.2457c.22324 0 .41943.14799.48076.36264l1.58556 5.54944c.18398.64395.77256 1.08792 1.44228 1.08792h4.5687c.6133 0 1.1649-.37343 1.3927-.94291l1.4743-3.6857c.2627-.65686-.2211-1.37139-.9285-1.37139h-8.31292l-.2606-.91208c-.18398-.64395-.77256-1.08792-1.44228-1.08792z" />
-											<path d="m6.5 14c.82843 0 1.5-.6716 1.5-1.5s-.67157-1.5-1.5-1.5-1.5.6716-1.5 1.5.67157 1.5 1.5 1.5z" />
-											<path d="m10.5 14c.8284 0 1.5-.6716 1.5-1.5s-.6716-1.5-1.5-1.5c-.82843 0-1.5.6716-1.5 1.5s.67157 1.5 1.5 1.5z" />
-										</g>
-									</svg>{" "}
-									Add to cart
-								</button>
-							</div>
+							{userRole === "retailer" && (
+								<form onSubmit={handleSubmit}>
+									<div className="mt-4">
+										<label>Quantity</label>
+										<div className="mt-2">
+											<input
+												type="number"
+												name="quantity"
+												value={credentials.quantity}
+												min={1}
+												max={crop.quantity}
+												onChange={onChange}
+												className="border border-[#c9c9c9] pl-4 py-2"
+											/>
+										</div>
+									</div>
+									<div className="mt-7">
+										<button
+											type="submit"
+											className="bg-[#363636] text-white py-3 w-full flex items-center gap-3 justify-center"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												fill="none"
+												height="30"
+												viewBox="0 0 16 16"
+												width="30"
+											>
+												<g fill="currentColor">
+													<path d="m2.5 2c-.27614 0-.5.22386-.5.5s.22386.5.5.5h.2457c.22324 0 .41943.14799.48076.36264l1.58556 5.54944c.18398.64395.77256 1.08792 1.44228 1.08792h4.5687c.6133 0 1.1649-.37343 1.3927-.94291l1.4743-3.6857c.2627-.65686-.2211-1.37139-.9285-1.37139h-8.31292l-.2606-.91208c-.18398-.64395-.77256-1.08792-1.44228-1.08792z" />
+													<path d="m6.5 14c.82843 0 1.5-.6716 1.5-1.5s-.67157-1.5-1.5-1.5-1.5.6716-1.5 1.5.67157 1.5 1.5 1.5z" />
+													<path d="m10.5 14c.8284 0 1.5-.6716 1.5-1.5s-.6716-1.5-1.5-1.5c-.82843 0-1.5.6716-1.5 1.5s.67157 1.5 1.5 1.5z" />
+												</g>
+											</svg>{" "}
+											Add to cart
+										</button>
+									</div>
+								</form>
+							)}
 							<hr className="opacity-8 mt-8"></hr>
 							<button className="mt-4 flex gap-4 items-center">
 								<Image

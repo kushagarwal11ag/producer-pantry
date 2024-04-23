@@ -12,6 +12,7 @@ import closeIcon from "../../public/closeIcon.svg";
 import defaultProfile from "../../public/defaultProfile.svg";
 
 const Navbar = ({ isProtected = false }) => {
+	const [userRole, setUserRole] = useState(null);
 	const [userAvatar, setUserAvatar] = useState(defaultProfile);
 	const [showMobileNav, setShowMobileNav] = useState(false);
 
@@ -27,6 +28,7 @@ const Navbar = ({ isProtected = false }) => {
 						withCredentials: true,
 					});
 					const userDetails = user?.data?.data;
+					setUserRole(userDetails?.role);
 					setUserAvatar(userDetails?.avatar?.url || defaultProfile);
 				} catch (error) {
 					console.log(error);
@@ -106,19 +108,21 @@ const Navbar = ({ isProtected = false }) => {
 									<li className="hover:text-orange-600">
 										<Link href="/contact">Contact Us</Link>
 									</li>
-									<li className="hover:text-orange-600">
-										<Link href="/checkout">
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												viewBox="0 0 24 24"
-												width={25}
-												height={25}
-												fill="currentColor"
-											>
-												<path d="M19,7H16V6A4,4,0,0,0,8,6V7H5A1,1,0,0,0,4,8V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V8A1,1,0,0,0,19,7ZM10,6a2,2,0,0,1,4,0V7H10Zm8,13a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V9H8v1a1,1,0,0,0,2,0V9h4v1a1,1,0,0,0,2,0V9h2Z" />
-											</svg>
-										</Link>
-									</li>
+									{userRole === "retailer" && (
+										<li className="hover:text-orange-600">
+											<Link href="/checkout">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 24 24"
+													width={25}
+													height={25}
+													fill="currentColor"
+												>
+													<path d="M19,7H16V6A4,4,0,0,0,8,6V7H5A1,1,0,0,0,4,8V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V8A1,1,0,0,0,19,7ZM10,6a2,2,0,0,1,4,0V7H10Zm8,13a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V9H8v1a1,1,0,0,0,2,0V9h4v1a1,1,0,0,0,2,0V9h2Z" />
+												</svg>
+											</Link>
+										</li>
+									)}
 								</>
 							) : (
 								<>
